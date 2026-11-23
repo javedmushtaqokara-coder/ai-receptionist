@@ -12,8 +12,16 @@ AI receptionist from start to finish.
    - The client's business type: common caller questions, booking flows,
      industry vocabulary, compliance concerns, and after-hours expectations.
    Check `/docs` first. Only research what is missing or out of date.
+   - Platform: the `research-voice-platform` skill (see "Platform research").
+   - Business type: the `research-business-type` skill, run at the start of
+     **every** client build. It covers what calls to that kind of business
+     sound like, what callers ask for, what they book and what gets
+     transferred. It drafts the call flow, prompt and functions in
+     `/clients/<client>/draft/`, caches the industry knowledge in
+     `/docs/business-types/<type>.md`, and ends with the owner questions.
 
-2. **Ask the owner only what they know.**
+2. **Ask the owner only what they know.** Ask only after the drafts exist,
+   so the questions cover just the gaps that research couldn't fill.
    - Ask at most **six questions** per client.
    - Ask only about business facts the owner knows: hours, services,
      prices, tone, how to handle bookings, who gets escalations, and so on.
@@ -32,7 +40,8 @@ AI receptionist from start to finish.
 ```
 /CLAUDE.md          this file
 /clients/<client>/  one folder per client; everything for that client lives here
-/docs/              cached platform knowledge, shared across clients
+/docs/<platform>/   cached platform knowledge, shared across clients
+/docs/business-types/<type>.md  cached industry knowledge, shared across clients
 ```
 
 - **One folder per client in `/clients`**, named in kebab-case after the
