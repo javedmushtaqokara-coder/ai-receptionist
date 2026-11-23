@@ -64,9 +64,25 @@ Whenever the owner gives a platform and an API key:
    endpoint, report whether it worked, and record the platform and its working
    test endpoint in `/docs/<platform>.md`.
 
+4. **Research the platform** with the `research-voice-platform` skill
+   (`.claude/skills/research-voice-platform/`).
+
+## Platform research
+
+- Run the `research-voice-platform` skill **whenever a new platform is
+  connected**. It reads the platform's full docs, maps what it does natively
+  and how to set each thing up through the API (integrations, tools, phone
+  numbers, testing), flags where a custom function is needed, and saves it all
+  to `/docs/<platform>/`.
+- **Re-run it only if the docs change.** Its first step compares checksums
+  against `/docs/<platform>/SOURCE.md` and stops if nothing changed.
+- Before every client build, read `/docs/<platform>/CAPABILITIES.md` instead
+  of the live docs.
+
 ## Platforms in use
 
-- **Voice: Retell** (`RETELL_API_KEY` in `.env`). Notes are in `/docs/retell.md`.
+- **Voice: Retell** (`RETELL_API_KEY` in `.env`). Capability map:
+  `/docs/retell/CAPABILITIES.md`.
 
 ## Final report (every build)
 
