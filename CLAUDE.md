@@ -29,11 +29,50 @@ AI receptionist from start to finish.
      models, prompts, integrations, hosting, and configuration are Claude's
      decisions. Pick sensible defaults and record them as assumptions.
 
-3. **Build** in the client's own folder (see below).
+3. **Build and deploy** with the `build-receptionist` skill. It reads `/docs`
+   and the industry research first, and assembles the receptionist from the
+   library skills below. It uses native integrations whenever they exist,
+   writes custom functions only when nothing native does (deployed to
+   Vercel), and picks the platform's newest fast model after checking the
+   model list and timing them, never an older default. It then creates,
+   configures, tests and publishes the agent, attaches a phone number, and
+   saves everything to the client's folder.
 
-4. **Deploy** the receptionist, or get it as close to deployed as access allows.
+4. **Report** (see the report format below).
 
-5. **Report** (see the report format below).
+## Skills
+
+| Skill | When |
+|---|---|
+| `research-voice-platform` | A new platform is connected, or its docs changed |
+| `research-business-type` | Start of every client build |
+| `build-receptionist` | After the owner answers the questions |
+| `receptionist-faq` | Every build: answer questions from the business facts |
+| `receptionist-transfer` | Every build: hand calls to a human |
+| `receptionist-after-hours` | Every build: closed hours, holidays, emergencies |
+| `receptionist-lead-capture` | Every build: take messages, notify the owner |
+| `receptionist-booking` | The business takes appointments |
+| `receptionist-cancel-reschedule` | Callers can change their bookings |
+
+All skills are in `.claude/skills/`. Add new receptionist abilities to the
+library as `receptionist-<ability>` instead of writing them into one client.
+
+## When the owner has to do something
+
+If anything requested can't be finished without the owner doing a step
+(signing in, paying, giving a key, forwarding a phone, registering SMS),
+walk them through it in **plain English, TL;DR size**: numbered steps, one
+action per line, no jargon, about six lines at most. Carry on with
+everything else in the meantime.
+
+## Keys Claude may ask for (once each)
+
+Ask once, in plain English with where to find it, save it to `.env`, and
+reuse it for every client:
+- `VERCEL_TOKEN`: for deploying custom functions
+- `RESEND_API_KEY`: for emailing the owner messages and leads
+- A client's integration key (Cal.com, Calendly, GoHighLevel, HubSpot, and
+  so on): per client, when its booking or CRM system needs one
 
 ## Folder structure
 
