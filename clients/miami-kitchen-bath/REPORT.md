@@ -1,6 +1,30 @@
 # Miami Kitchen & Bath receptionist: build report (2026-11-23)
 
-## Built
+## Update: Cal.com booking added (version 1, published)
+
+- **Booking**: Sofia books the free in-home estimate straight into Cal.com.
+  New appointment type **"Miami Kitchen & Bath Free In-Home Estimate"**
+  (`8039591`) with its own hours **"Miami Kitchen & Bath Hours"** (`2684903`):
+  Mon–Fri 8–6 and Sat 9–3 Eastern. Visits are one hour with a 30-minute
+  travel buffer, booked at least 24 hours ahead and up to 30 days out. Each
+  booking captures name, email, phone, project address and a project
+  summary. **Spanish callers get their Cal.com confirmation email in
+  Spanish.**
+- **Reschedule and cancel**: Sofia finds the visit by the email it was
+  booked with, confirms it, then moves or cancels it.
+- **FAQ and after-hours messages**: already built (below); after hours she
+  can now also book and change visits.
+- Uses the same Cal.com connection as Cowboy Air (`app_7fc8a1b6f0116745fda3fbfd`, auth ✅).
+- 4 new test cases (English booking, Spanish booking, reschedule, cancel),
+  13 in total.
+- **Watch out: one Cal.com account, two clients.** Cal.com blocks a time
+  slot when **any** booking exists on the account. A Cowboy Air visit at 10
+  AM Dallas time (11 AM Miami) hides Sofia's 11 AM slot, and the other way
+  round. Fine for testing, but each client should have **their own Cal.com
+  account** before going live. When they do, send me the new key; switching
+  takes a few minutes.
+
+## Built (original build)
 
 - **Receptionist "Sofia"**: Retell agent `agent_8dbfe430b1b3ca97d80f655042`
   ("Miami Kitchen & Bath Receptionist"), **published** (version 0).
@@ -30,8 +54,11 @@
 
 ## Assumed
 
-- **No calendar booking.** No calendar was given, and remodelers confirm
-  visits by phone. Sofia takes the request and the team calls back.
+- ~~No calendar booking.~~ Replaced by Cal.com booking in version 1.
+  Callers who won't give an email, or when booking fails, still get a
+  request with a callback within one business day.
+- Estimate visits are 1 hour plus a 30-minute buffer, at least a day's
+  notice, and one visit at a time.
 - Persona "Sofia"; voice retell-Sloane, accepted by Retell for English and
   Spanish.
 - Hours Mon–Fri 8–6 and Sat 9–3, from the site's business data (the pages

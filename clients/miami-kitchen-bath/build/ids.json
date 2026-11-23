@@ -1,11 +1,18 @@
 {
   "platform": "retell",
   "agent_id": "agent_8dbfe430b1b3ca97d80f655042",
-  "agent_version_published": 0,
+  "agent_version_published": 1,
   "llm_id": "llm_796b38572c5ff953ba5b65878b5f",
   "voice_id": "retell-Sloane",
-  "language": ["en-US", "es-419"],
+  "language": [
+    "en-US",
+    "es-419"
+  ],
   "phone_number": null,
   "notify_owner_function_url": null,
-  "test_case_definition_ids_file": "api/test-case-ids.txt"
+  "test_case_definition_ids_file": "api/test-case-ids.txt",
+  "llm_version_published": 1,
+  "calcom_app_id": "app_7fc8a1b6f0116745fda3fbfd",
+  "calcom_event_type_id": 8039591,
+  "calcom_schedule_id": 2684903
 }

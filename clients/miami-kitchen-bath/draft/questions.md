@@ -3,10 +3,10 @@
 1. **Which number will customers call?** Will Sofia answer your main line,
    (305) 423-8277 (forwarded), or a new number? *Example: "Forward our line
    to her when we don't pick up."*
-2. **Should Sofia book the in-home visit herself?** If yes, which calendar
-   do you use: Google Calendar, Cal.com or Calendly? Otherwise she takes the
-   request and you call back within a business day. *Example: "Yes, Adam's
-   Google Calendar, visits are 1 hour."*
+2. **Estimate visits** (now booked in Cal.com): is one hour, at least a
+   day's notice, and one visit at a time right? Is there a calendar of
+   Adam's own that should be used? *Example: "90 minutes, two a day max, use
+   Adam's own Cal.com."*
 3. **Where should new leads go?** Email, text, or both? *Example:
    "info@kitchenandbathmiami.com and text Adam."*
 4. **Should hot leads or problems go straight to a person?** If yes, to whom,

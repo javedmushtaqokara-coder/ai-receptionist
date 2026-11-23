@@ -168,6 +168,26 @@ Text tests are billed per message, and voice tests per minute at production rate
 
 ## 12. Gotchas and deprecations
 
+**Learned on builds (2026-11-23):**
+- **Published response engines are locked.** `PATCH /update-retell-llm` on a
+  published LLM returns 400 "Cannot update published LLM". To change a live
+  agent: `POST /create-agent-version/{agent_id}` with `{"base_version": N}`,
+  which returns a draft whose `response_engine.version` is N+1. Then
+  `PATCH /update-retell-llm/{llm_id}?version=N+1`, then
+  `POST /publish-agent-version/{agent_id}` with `{"version": N+1}`.
+- `publish-agent-version` needs `{"version": N}` in the body.
+- Cal.com apps need `tenant_url: "cal.com"` (or `cal.eu`) on `create-app`.
+- The Cal.com booking tool's fields come from the event type's booking
+  fields (resolved by `get-app-tool-schema` round 2). Email is always
+  required, and `list_calcom_bookings` searches by attendee email only.
+- One Cal.com account shared by two clients: bookings on any event type
+  block slots on all of them. Give each client their own account.
+- A new account with no credits returns 402 "Credit balance exhausted" for
+  playground, simulation, batch tests and web calls. Buying a number returns
+  402 "requires a card on file". Creating and publishing agents works
+  without credits.
+- Multilingual: `language: ["en-US","es-419"]` with `retell-Sloane` is accepted.
+
 - Retired 400-error endpoints: `GET /list-agents`, `GET /list-chat-agents`, `GET /list-phone-numbers` and other v1 lists, `GET /get-agent-versions`, and `publish-agent`.
 - Multi-prompt agents: creation ends **2026-12-15**.
 - Model replacements happen automatically. Gemini 2.5 Pro becomes gemini-3.8-flash on **2026-11-29**, and GPT Realtime moves to 2.1 on **2027-01-19**. Legacy model fields are removed **2027-01-31**. Set models through `model_config`, not the legacy fields.
