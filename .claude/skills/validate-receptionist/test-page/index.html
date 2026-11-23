@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receptionist Voice Test</title>
+<style>
+  :root {
+    --bg: #f6f5f2; --surface: #ffffff; --text: #1d1d1b; --muted: #6b6a66;
+    --line: #e3e1dc; --accent: #2f6fed; --accent-2: #7aa5ff; --live: #1f9d63; --warn: #c2410c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121212; --surface: #1c1c1c; --text: #f1f0ec; --muted: #a3a19b;
+      --line: #2e2e2e; --accent: #6d9bff; --accent-2: #2f5fd0; --live: #34c27f; --warn: #fb923c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121212; --surface: #1c1c1c; --text: #f1f0ec; --muted: #a3a19b;
+    --line: #2e2e2e; --accent: #6d9bff; --accent-2: #2f5fd0; --live: #34c27f; --warn: #fb923c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 48px; }
+  header h1 { font-size: 1.5rem; margin: 0; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  .stage { display: grid; place-items: center; padding: 40px 0 24px; }
+  .orb { width: 180px; height: 180px; border-radius: 50%; border: 0; cursor: pointer;
+    background: radial-gradient(circle at 35% 30%, var(--accent-2), var(--accent) 60%);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: scale(var(--level, 1)); transition: transform 80ms linear, box-shadow 200ms;
+    color: #fff; font: 600 1rem/1 inherit; }
+  .orb:focus-visible { outline: 3px solid var(--text); outline-offset: 6px; }
+  .orb.live { box-shadow: 0 0 0 calc((var(--level, 1) - 1) * 120px) color-mix(in srgb, var(--accent) 25%, transparent); }
+  .orb.connecting { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(0.94); } }
+  @media (prefers-reduced-motion: reduce) { .orb, .orb.connecting { animation: none; transition: none; } }
+  .status { margin-top: 16px; color: var(--muted); min-height: 1.5em; text-align: center; }
+  .status.live { color: var(--live); } .status.error { color: var(--warn); }
+  .controls { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+  button.btn { border: 1px solid var(--line); background: var(--surface); color: var(--text);
+    padding: 8px 14px; border-radius: 8px; font: inherit; cursor: pointer; }
+  button.btn[hidden] { display: none; }
+  section { background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; margin-top: 20px; }
+  section h2 { font-size: 1rem; margin: 0 0 8px; }
+  ol { margin: 0; padding-left: 20px; } li { margin: 8px 0; }
+  li strong { display: block; } li span { color: var(--muted); font-size: .92rem; }
+  .turn { margin: 6px 0; } .turn b { color: var(--muted); font-weight: 600; margin-right: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="title">Receptionist voice test</h1>
+    <p id="subtitle">Tap the orb and talk to the receptionist through your browser.</p>
+  </header>
+
+  <div class="stage">
+    <button class="orb" id="orb" aria-label="Start call">Tap to talk</button>
+    <div class="status" id="status" role="status" aria-live="polite">Ready</div>
+    <div class="controls">
+      <button class="btn" id="mute" hidden>Mute</button>
+      <button class="btn" id="end" hidden>End call</button>
+    </div>
+  </div>
+
+  <section id="scenarios-box" hidden>
+    <h2>Try these calls</h2>
+    <ol id="scenarios"></ol>
+  </section>
+
+  <section id="transcript-box" hidden>
+    <h2>Last call transcript</h2>
+    <div id="transcript"></div>
+  </section>
+</main>
+
+<script type="module">
+  import { RetellClient } from "https://cdn.jsdelivr.net/npm/retell-client-js-sdk@3.0.4/+esm";
+
+  const $ = (id) => document.getElementById(id);
+  const code = new URLSearchParams(location.hash.slice(1)).get("code") || "";
+  const orb = $("orb"), statusEl = $("status");
+  let call = null, muted = false, lastError = "";
+
+  const setStatus = (text, kind = "") => { statusEl.textContent = text; statusEl.className = "status " + kind; };
+
+  const config = await fetch("config.json").then((r) => r.json()).catch(() => ({}));
+  if (config.business_name) {
+    $("title").textContent = config.business_name + " receptionist";
+    document.title = (config.agent_name || config.business_name) + " test";
+  }
+  if (Array.isArray(config.scenarios) && config.scenarios.length) {
+    $("scenarios-box").hidden = false;
+    for (const s of config.scenarios) {
+      const li = document.createElement("li");
+      li.innerHTML = "<strong></strong><span></span>";
+      li.querySelector("strong").textContent = s.title;
+      li.querySelector("span").textContent = `Say: ${s.say} Expect: ${s.expect}`;
+      $("scenarios").append(li);
+    }
+  }
+  if (!code) setStatus("This link is missing its access code. Use the link printed by the test server.", "error");
+
+  // The SDK talks to this page's own server, which holds the real API key.
+  const client = new RetellClient({ key: code, baseURL: location.origin });
+
+  function reset() {
+    orb.classList.remove("live", "connecting");
+    orb.style.setProperty("--level", 1);
+    orb.textContent = "Tap to talk";
+    orb.setAttribute("aria-label", "Start call");
+    $("mute").hidden = $("end").hidden = true;
+    muted = false; $("mute").textContent = "Mute";
+  }
+
+  async function showTranscript(callId) {
+    for (let i = 0; i < 6; i++) {
+      await new Promise((r) => setTimeout(r, 2000));
+      const res = await fetch(`v2/get-call/${callId}`, { headers: { Authorization: `Bearer ${code}` } });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const turns = data.transcript_object || [];
+      if (!turns.length && i < 5) continue;
+      const box = $("transcript"); box.replaceChildren();
+      for (const t of turns) {
+        const p = document.createElement("p"); p.className = "turn";
+        const b = document.createElement("b"); b.textContent = t.role === "agent" ? "Agent" : "You";
+        p.append(b, document.createTextNode(t.content));
+        box.append(p);
+      }
+      if (!turns.length) box.textContent = "No transcript recorded.";
+      $("transcript-box").hidden = false;
+      return;
+    }
+  }
+
+  orb.addEventListener("click", () => {
+    if (call && call.status !== "ended") return;
+    if (!code) return;
+    lastError = "";
+    orb.classList.add("connecting"); orb.textContent = "Connecting";
+    setStatus("Connecting… allow the microphone if asked.");
+    call = client.createWebCall({
+      agent_id: config.agent_id,
+      audio: { emitRawAudioSamples: true },
+      hooks: {
+        onStatus: async (s) => {
+          if (s === "live") {
+            orb.classList.remove("connecting"); orb.classList.add("live");
+            orb.textContent = "Listening"; orb.setAttribute("aria-label", "Call in progress");
+            $("mute").hidden = $("end").hidden = false;
+            setStatus("Live. Start talking.", "live");
+            try { await call.startAudioPlayback(); } catch {}
+          }
+        },
+        onAudio: (samples) => {
+          let sum = 0; for (let i = 0; i < samples.length; i++) sum += samples[i] * samples[i];
+          const rms = Math.sqrt(sum / (samples.length || 1));
+          orb.style.setProperty("--level", (1 + Math.min(rms * 4, 0.35)).toFixed(3));
+        },
+        onEnd: () => {
+          const id = call && call.callId;
+          reset();
+          if (!lastError) setStatus("Call ended.");
+          if (id) showTranscript(id);
+        },
+        // The SDK reports an error, then ends the call: keep the error on screen.
+        onError: (err) => {
+          lastError = (err && err.message) ? err.message : String(err);
+          if (/credit|balance|402/i.test(lastError)) lastError += " Add credits in the Retell dashboard (Billing).";
+          reset(); setStatus("Couldn't start the call: " + lastError, "error");
+        },
+      },
+    });
+  });
+
+  $("end").addEventListener("click", async () => { await call?.end(); });
+  $("mute").addEventListener("click", () => {
+    if (!call) return;
+    muted ? call.unmute() : call.mute(); muted = !muted;
+    $("mute").textContent = muted ? "Unmute" : "Mute";
+  });
+</script>
+</body>
+</html>

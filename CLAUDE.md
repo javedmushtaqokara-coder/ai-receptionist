@@ -38,7 +38,13 @@ AI receptionist from start to finish.
    configures, tests and publishes the agent, attaches a phone number, and
    saves everything to the client's folder.
 
-4. **Report** (see the report format below).
+4. **Validate and report** with the `validate-receptionist` skill, after
+   **every** build and every change to a live receptionist. It confirms the
+   agent exists, functions are registered, integrations authenticate and the
+   number is attached; runs the simulation tests; builds and opens the
+   voice-orb test page (a Retell web call in the browser); writes the report
+   (built, assumed, couldn't do); and gives the owner three test-call
+   scenarios for the business type. A build isn't finished until it has run.
 
 ## Skills
 
@@ -47,6 +53,7 @@ AI receptionist from start to finish.
 | `research-voice-platform` | A new platform is connected, or its docs changed |
 | `research-business-type` | Start of every client build |
 | `build-receptionist` | After the owner answers the questions |
+| `validate-receptionist` | After every build or change: checks, simulation, voice test page, report, three test calls |
 | `receptionist-faq` | Every build: answer questions from the business facts |
 | `receptionist-transfer` | Every build: hand calls to a human |
 | `receptionist-after-hours` | Every build: closed hours, holidays, emergencies |

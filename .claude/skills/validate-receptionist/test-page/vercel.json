@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/config.json", "destination": "/api/retell?route=config.json" },
+    { "source": "/v2/:path*", "destination": "/api/retell?route=v2/:path*" },
+    { "source": "/v3/:path*", "destination": "/api/retell?route=v3/:path*" }
+  ]
+}
