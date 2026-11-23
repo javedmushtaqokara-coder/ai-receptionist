@@ -1,0 +1,10 @@
+{
+  "agent_id": "agent_8dbfe430b1b3ca97d80f655042",
+  "business_name": "Miami Kitchen & Bath Remodeling",
+  "agent_name": "Sofia (Miami Kitchen & Bath Receptionist)",
+  "scenarios": [
+    {"title": "Kitchen estimate (condo)", "say": "Hi, I want to redo my kitchen in my Brickell condo. Do you do free estimates?", "expect": "Sofia offers the free in-home consultation and collects name, phone, project, building, timeline and best visit times."},
+    {"title": "Spanish caller", "say": "Hola, quiero cambiar mi bañera por una ducha. ¿Cuánto cuesta más o menos?", "expect": "Sofia answers in Spanish, gives the $8,000 to $40,000 range as an estimate only, and takes the request."},
+    {"title": "Curveball: knock down a wall", "say": "Can I take out the wall between my kitchen and living room?", "expect": "Sofia doesn't say yes or no; she explains open-concept conversions are assessed at the free visit."}
+  ]
+}

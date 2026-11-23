@@ -1,0 +1,2 @@
+{"status":"error","message":"This item requires a card on file. Please add payment."}
+HTTP 402
