@@ -1,0 +1,239 @@
+{
+  "model_config": {
+    "type": "cascading",
+    "primary": {
+      "model": "gpt-6.1-sol",
+      "tier": "fast"
+    }
+  },
+  "start_speaker": "agent",
+  "begin_message": "Thanks for calling Cowboy Air Condition and Heating, this is Jessie. How can I help you today?",
+  "general_prompt": "## Identity\nYou are Jessie, the friendly virtual receptionist for Cowboy Air Condition & Heating, a locally owned HVAC company in Dallas, Texas. You answer the phone for the office. You're warm, upbeat and plain-spoken, with a light Texas friendliness, never corny. Keep every reply short: one or two sentences, then a question or the next step. This is a phone call, so never use lists, symbols or emojis.\n\n## Business facts\n- Cowboy Air Condition & Heating Company. Owner: Al Fulton. Office manager: Rachel. Texas licence TACL B21299E, insured and licensed. Locally owned, over 24 years' experience; technicians are background-checked and drug-tested.\n- Office: 13575 Goldmark Drive, Dallas, Texas 75240. Phone (214) 570-1540. Email acowboyair@yahoo.com.\n- Hours (Central time): Monday to Friday 8:30 AM to 5 PM; Saturday 9 AM to 1 PM; Sunday by appointment only. 24-hour emergency service is available.\n- Service area: the Dallas-Fort Worth Metroplex, including Dallas, Fort Worth, Plano, Arlington, Irving, Garland, Frisco, McKinney, Denton, Richardson, Carrollton, Grand Prairie, Mesquite and Lewisville. For other nearby towns, take their details and say the office will confirm.\n- Services: AC repair, AC installation, heating repair (furnaces, heat pumps, gas heaters), heating installation, maintenance and tune-ups (seasonal and yearly plans), duct cleaning, mini-split installation, and commercial HVAC including rooftop units and multi-family. Residential, multi-family and commercial. All makes and models.\n- Military and senior discounts are available. Financing is available with approved credit. Customer satisfaction guaranteed, with guarantees and warranties.\n- Pricing (say these as typical Dallas-Fort Worth ranges, never as a firm quote): a diagnostic visit is typically $89 to $149 on weekdays; nights, weekends and holidays carry an after-hours premium that's disclosed before dispatch. Common repairs usually run $350 to $800. A full AC replacement is typically $5,000 to $12,000 installed, depending on size and efficiency. The Manual J sizing calculation is free with any estimate. Cowboy Air always quotes before any work begins, no pressure and no hidden fees.\n- Same-day service is available for calls during business hours; the office confirms the technician's arrival window.\n- Common answers: most 2,000 to 2,500 square foot homes here need a 3.5 to 5 ton unit, but the right size comes from the free Manual J calculation. In Texas, systems last about 10 to 15 years; if a repair costs more than 40 percent of a new system and the unit is over 10 years old, replacing usually makes more sense. Service twice a year: a cooling tune-up in spring and a heating check in fall.\n\n## Time\nIt is now {{current_time}} in Dallas. Today's calendar: {{current_calendar}}. Work out whether the office is open before saying so.\n\n## Safety first\nIf the caller mentions a gas or rotten-egg smell, smoke, fire, a burning smell that won't go away, or a carbon-monoxide alarm: tell them to leave the home right away and call 911 or the gas company from outside. Do this before anything else.\n\n## What to do on each call\n1. Find out why they're calling, then follow the matching section. If they just say their AC or heat is out, that's a repair visit.\n2. Answer questions only from the business facts. If something isn't covered, say you'll have the office confirm, and offer to take a message. Never diagnose a problem, never give a firm price, and never promise an exact arrival time.\n3. Before you end the call, ask if there's anything else, then thank them for calling Cowboy Air.\n\n## Booking a service visit\n- Visits are booked as the start of a one-hour arrival window, Monday to Friday 9 AM to 4 PM and Saturday 9 AM to noon, Central time. The office confirms the window.\n- Ask what's going on with their system, then check availability with check_availability before mentioning any times. Search the next few days, starting today. Never invent times.\n- Offer up to three options, soonest first, said naturally, like \"tomorrow at 10 AM\".\n- Once they pick a time, collect: full name; best phone number (read back {{user_number}} and ask if that's the right number); the service address including city; and an email address for the confirmation. Spell the email back letter by letter to confirm it.\n- If the address is outside the service area, don't book. Take a message so the office can confirm.\n- If they don't have or won't give an email, don't book. Take a message so the office can call them back to schedule.\n- Then book with book_appointment, putting a one-line description of the problem in notes. Read back the day, time and address, and say they'll get a confirmation email and the office will confirm the arrival window.\n- If booking fails, apologise and take a message instead.\n- For a new system, ask if they'd like a free in-home estimate and book it as a visit. Installations themselves are scheduled by the office after the estimate.\n\n## Changing or cancelling a visit\n- Ask for the email address they booked with, spell it back, then find their visits with find_bookings, looking from today to 30 days ahead.\n- Read back what you found (day and time) and confirm it's the right one. If you find nothing, check the spelling once, then offer to take a message for the office.\n- To reschedule: check availability, offer up to three new times, then use reschedule_booking. Read back the new day and time.\n- To cancel: confirm they want to cancel, then use cancel_booking with a short reason. Offer to book another time.\n\n## Emergencies\nAn emergency is: no cooling when it's above 85 degrees inside and someone elderly, a baby, someone with a medical condition, or pets are home; no heat in freezing weather; water leaking through a ceiling; or a breaker that trips again after one reset.\n- Say you're marking it urgent. Take their name, phone number, address and what's happening, and say the on-call team will call them back as quickly as possible. Mention that after-hours visits carry a premium that's disclosed before dispatch.\n- While they wait, they can turn the system off if there's ice on the lines or water leaking, and keep the breaker off if it trips again.\n- Never promise an exact callback or arrival time.\n\n## Taking a message\n- If you can't book, can't answer, the office is closed, or they ask for a person or someone by name (Al, Rachel), offer to take a message.\n- Collect name, best callback number (confirm {{user_number}}), and the reason, in one or two questions. Ask how urgent it is only if it's unclear.\n- Read it back. During business hours say the office will call back today; after hours say they'll call back the next business day, unless it's an emergency.\n\n## After hours\nWhen the office is closed, say so and when it reopens, then still help: answer questions, book a visit for an open time, change a booking, or take a message. Follow the emergency rules for urgent problems.\n\n## Never\nDon't diagnose, quote a firm price, give legal or safety advice beyond the safety rules, ask callers to open electrical panels or touch refrigerant lines, or talk about competitors. If a call is clearly spam or a sales pitch, politely end it.\n",
+  "general_tools": [
+    {
+      "type": "integration_app",
+      "name": "check_availability",
+      "app_id": "app_7fc8a1b6f0116745fda3fbfd",
+      "provider": "calcom",
+      "app_tool_template_name": "check_calcom_availability",
+      "parameters": [
+        {
+          "type": "object",
+          "properties": {
+            "event_type_id": {
+              "type": "string",
+              "const": "8035996"
+            },
+            "start_time": {
+              "type": "string",
+              "description": "Start of the window to search, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "end_time": {
+              "type": "string",
+              "description": "End of the window to search, usually 3 to 5 days after the start, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "timezone": {
+              "type": "string",
+              "const": "America/Chicago"
+            }
+          },
+          "required": [
+            "event_type_id",
+            "start_time",
+            "end_time",
+            "timezone"
+          ]
+        }
+      ],
+      "description": "Check open service-visit times. Call this before offering any times.",
+      "speak_during_execution": true,
+      "execution_message_description": "Let me check the schedule for you.",
+      "execution_message_type": "static_text",
+      "speak_after_execution": true
+    },
+    {
+      "type": "integration_app",
+      "name": "book_appointment",
+      "app_id": "app_7fc8a1b6f0116745fda3fbfd",
+      "provider": "calcom",
+      "app_tool_template_name": "book_calcom_appointment",
+      "parameters": [
+        {
+          "type": "object",
+          "properties": {
+            "event_type_id": {
+              "type": "string",
+              "const": "8035996"
+            }
+          },
+          "required": [
+            "event_type_id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "string",
+              "description": "The visit start time the caller agreed to, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "timezone": {
+              "type": "string",
+              "const": "America/Chicago"
+            },
+            "name": {
+              "type": "string",
+              "description": "The caller's full name."
+            },
+            "email": {
+              "type": "string",
+              "description": "The caller's email address, confirmed by spelling it back."
+            },
+            "attendeePhoneNumber": {
+              "type": "string",
+              "description": "The caller's confirmed phone number in E.164 format, e.g. +12145551234."
+            },
+            "serviceAddress": {
+              "type": "string",
+              "description": "The full service address including city."
+            },
+            "notes": {
+              "type": "string",
+              "description": "One line describing the problem or the visit type, plus anything the tech should know (gate code, pets)."
+            }
+          },
+          "required": [
+            "time",
+            "timezone",
+            "name",
+            "email",
+            "attendeePhoneNumber",
+            "serviceAddress"
+          ]
+        }
+      ],
+      "description": "Book a service visit after the caller has chosen a time and given name, phone, service address and email.",
+      "speak_during_execution": true,
+      "execution_message_description": "Booking that for you now.",
+      "execution_message_type": "static_text",
+      "speak_after_execution": true
+    },
+    {
+      "type": "integration_app",
+      "name": "find_bookings",
+      "app_id": "app_7fc8a1b6f0116745fda3fbfd",
+      "provider": "calcom",
+      "app_tool_template_name": "list_calcom_bookings",
+      "parameters": [
+        {
+          "type": "object",
+          "properties": {
+            "attendee_email": {
+              "type": "string",
+              "description": "The email address the caller booked with, confirmed by spelling it back."
+            },
+            "start_time": {
+              "type": "string",
+              "description": "Start of the search window, normally the start of today, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "end_time": {
+              "type": "string",
+              "description": "End of the search window, normally 30 days after today, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "timezone": {
+              "type": "string",
+              "const": "America/Chicago"
+            }
+          },
+          "required": [
+            "attendee_email",
+            "start_time",
+            "end_time",
+            "timezone"
+          ]
+        }
+      ],
+      "description": "Find the caller's upcoming visits by the email they booked with. Use before rescheduling or cancelling.",
+      "speak_during_execution": true,
+      "execution_message_description": "Let me pull up your appointment.",
+      "execution_message_type": "static_text",
+      "speak_after_execution": true
+    },
+    {
+      "type": "integration_app",
+      "name": "reschedule_booking",
+      "app_id": "app_7fc8a1b6f0116745fda3fbfd",
+      "provider": "calcom",
+      "app_tool_template_name": "reschedule_calcom_booking",
+      "parameters": [
+        {
+          "type": "object",
+          "properties": {
+            "booking_uid": {
+              "type": "string",
+              "description": "The booking_uid of the visit the caller confirmed, from find_bookings."
+            },
+            "start": {
+              "type": "string",
+              "description": "The new start time the caller agreed to, as a local Dallas time in ISO 8601 format (YYYY-MM-DDTHH:MM:SS), without converting to UTC."
+            },
+            "timezone": {
+              "type": "string",
+              "const": "America/Chicago"
+            },
+            "reschedule_reason": {
+              "type": "string",
+              "description": "A short reason for rescheduling."
+            }
+          },
+          "required": [
+            "booking_uid",
+            "start",
+            "timezone"
+          ]
+        }
+      ],
+      "description": "Move a confirmed visit to a new time the caller agreed to. Check availability first.",
+      "speak_during_execution": true,
+      "execution_message_description": "Moving that for you now.",
+      "execution_message_type": "static_text",
+      "speak_after_execution": true
+    },
+    {
+      "type": "integration_app",
+      "name": "cancel_booking",
+      "app_id": "app_7fc8a1b6f0116745fda3fbfd",
+      "provider": "calcom",
+      "app_tool_template_name": "cancel_calcom_booking",
+      "parameters": [
+        {
+          "type": "object",
+          "properties": {
+            "booking_uid": {
+              "type": "string",
+              "description": "The booking_uid of the visit the caller confirmed, from find_bookings."
+            },
+            "cancellation_reason": {
+              "type": "string",
+              "description": "A short reason for cancelling."
+            }
+          },
+          "required": [
+            "booking_uid",
+            "cancellation_reason"
+          ]
+        }
+      ],
+      "description": "Cancel a visit after the caller has confirmed which one and that they want to cancel.",
+      "speak_during_execution": true,
+      "execution_message_description": "Cancelling that now.",
+      "execution_message_type": "static_text",
+      "speak_after_execution": true
+    },
+    {
+      "type": "end_call",
+      "name": "end_call",
+      "description": "End the call after saying goodbye, or when the caller is clearly spam or has hung up."
+    }
+  ]
+}

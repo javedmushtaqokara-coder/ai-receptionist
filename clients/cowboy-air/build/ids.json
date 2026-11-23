@@ -1,0 +1,13 @@
+{
+  "platform": "retell",
+  "agent_id": "agent_806433bde282144f7d62420ddd",
+  "agent_version_published": 0,
+  "llm_id": "llm_a030cf49052392c221d26fbb9f6d",
+  "voice_id": "retell-Marissa",
+  "calcom_app_id": "app_7fc8a1b6f0116745fda3fbfd",
+  "calcom_event_type_id": 8035996,
+  "calcom_schedule_id": 2683659,
+  "phone_number": null,
+  "notify_owner_function_url": null,
+  "test_case_definition_ids_file": "api/test-case-ids.txt"
+}

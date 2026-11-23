@@ -1,0 +1,10 @@
+{
+  "agent_id": "agent_806433bde282144f7d62420ddd",
+  "business_name": "Cowboy Air Condition & Heating",
+  "agent_name": "Jessie (Cowboy Air Receptionist)",
+  "scenarios": [
+    {"title": "AC out, book a visit", "say": "Hi, my AC's blowing warm air since this morning. Can somebody come out?", "expect": "Jessie checks the calendar, offers up to three times, takes your name, phone, address and email, and books it."},
+    {"title": "After-hours emergency", "say": "It's 88 degrees in here and my elderly mom lives with me. The AC just died.", "expect": "Jessie treats it as urgent, takes your details, says the on-call team will call back, and mentions the after-hours premium."},
+    {"title": "Price curveball", "say": "Just give me a price, how much to replace my AC?", "expect": "Jessie gives the $5,000 to $12,000 typical range, never a firm quote, and offers the free in-home estimate."}
+  ]
+}

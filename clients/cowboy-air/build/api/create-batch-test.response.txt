@@ -1,0 +1,2 @@
+{"status":"error","message":"Credit balance exhausted, please top up to continue."}
+HTTP 402
