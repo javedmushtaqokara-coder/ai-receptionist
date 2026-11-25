@@ -1,11 +1,17 @@
 {
   "platform": "retell",
-  "retell_workspace": "pending (owner to confirm)",
-  "retell_key_env": "RETELL_API_KEY",
-  "agent_id": null,
-  "llm_id": null,
+  "retell_workspace": "Test Calling Agent (org_fn1ZqnGmkpiYIRyX)",
+  "retell_key_env": "RETELL_API_KEY_TEST",
+  "agent_id": "agent_c7c0705c10eb4d31a7556aef7e",
+  "llm_id": "llm_2f2b2078d3b4720cf2e963a370fa",
   "calcom_schedule_id": 2694949,
   "calcom_event_type_id": 8071891,
   "calcom_seats_per_slot": 4,
-  "phone_number": null
+  "phone_number": null,
+  "agent_version_published": 1,
+  "llm_version_published": 1,
+  "voice_id": "retell-Marissa",
+  "calcom_app_id_in_workspace": "app_8ea5ad1afc4c3b02fe5cba57",
+  "model": "gpt-6-luna (fast) + backup claude-5.5-haiku",
+  "test_case_definition_ids_file": "api/test-case-ids.txt"
 }

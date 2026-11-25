@@ -188,6 +188,39 @@ Text tests are billed per message, and voice tests per minute at production rate
   without credits.
 - Multilingual: `language: ["en-US","es-419"]` with `retell-Sloane` is accepted.
 
+**Learned on builds (2026-11-25):**
+- **Model speed (playground round trip, median of 3, Toronto agent):**
+  gpt-6-luna fast 0.92 s · gpt-6-luna standard 1.06 · gpt-6.2-sol fast 1.13
+  · gpt-6.1-terra fast 1.17 · claude-5.5-haiku 1.38 · gpt-6.1-sol ultrafast
+  1.97 · gemini-4-hydrogen 2.74 · gemini-3.8-flash 5.21 · gemini-4-carbon 6.19
+  · gemini-4-neon 8.28. **Start with gpt-6-luna (fast), with backup
+  claude-5.5-haiku**, then confirm with the build's own timing and batch tests.
+  Details: `clients/daphne-toronto/build/model-choice.md`.
+- **Tiers:** `fast` is offered on the GPT models; Claude and Gemini models
+  accept only `standard`; `ultrafast` only on gpt-6.1-sol.
+- **Small models act too early.** They need an explicit rule: "never book,
+  change or cancel in the same turn you ask a question; wait for yes; never
+  search before the email is confirmed". With that rule, luna went from 7/10
+  to 9/10.
+- `{{current_time}}` is a system variable: a test case's
+  `dynamic_variables.current_time` does **not** override it. Write
+  after-hours test criteria that hold either way.
+- Simulated callers have no `{{user_number}}`; set
+  `dynamic_variables.user_number` in test cases.
+- `PUT /update-test-case-definition/{id}` takes partial bodies (metrics,
+  dynamic_variables, tool_mocks).
+- Cal.com **seated** event types (`seats.seatsPerTimeSlot`) work for
+  restaurants (several tables per slot); a "number" booking field is exposed
+  to Retell as a string.
+- **Web calls through our own proxy:** with `RetellClient({ baseURL })` the
+  SDK also sends WebRTC signaling to
+  `<baseURL>/webrtc-proxy/<call_id>/v1/webrtc/sessions[/<id>]` (POST, PATCH,
+  DELETE) with the call's own access token. Pass those through unchanged. The
+  test page's `proxy.mjs` does this.
+- Workspace API keys can stop working ("Invalid API Key") if the owner
+  deletes them; ask for a new key, and check `get-api-key-info` before every
+  build.
+
 - Retired 400-error endpoints: `GET /list-agents`, `GET /list-chat-agents`, `GET /list-phone-numbers` and other v1 lists, `GET /get-agent-versions`, and `publish-agent`.
 - Multi-prompt agents: creation ends **2026-12-15**.
 - Model replacements happen automatically. Gemini 2.5 Pro becomes gemini-3.8-flash on **2026-11-29**, and GPT Realtime moves to 2.1 on **2027-01-19**. Legacy model fields are removed **2027-01-31**. Set models through `model_config`, not the legacy fields.

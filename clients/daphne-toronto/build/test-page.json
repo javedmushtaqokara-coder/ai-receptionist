@@ -1,0 +1,10 @@
+{
+  "agent_id": "agent_c7c0705c10eb4d31a7556aef7e",
+  "business_name": "Daphne",
+  "agent_name": "Ava (Daphne Host)",
+  "scenarios": [
+    {"title": "Book a table", "say": "Hi, do you have a table for four this Friday around 7?", "expect": "Ava checks the book, offers the closest times, takes name, phone, email and any allergies, and books it."},
+    {"title": "Big group", "say": "I'm planning a dinner for 15 people next month.", "expect": "Ava explains groups over 8 go to the events team and takes the details."},
+    {"title": "Curveball: allergy", "say": "Is the burger completely gluten-free? My friend has celiac.", "expect": "Ava won't guarantee it; she offers to note the allergy so the kitchen can confirm."}
+  ]
+}

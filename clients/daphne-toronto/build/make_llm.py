@@ -52,7 +52,7 @@ tools = [
                "name": s("The guest's full name."),
                "email": s("The guest's email, confirmed by spelling it back."),
                "attendeePhoneNumber": s("The guest's confirmed phone number in E.164 format, e.g. +14165551234."),
-               "partySize": s("Number of guests, 1 to 8.", typ="number"),
+               "partySize": s("Number of guests as digits, 1 to 8, e.g. '4'."),
                "seating": s("Seating preference.", enum=["No preference", "Dining room", "Patio", "Bar or lounge"]),
                "notes": s("Occasion, allergies or other requests.")},
               ["time", "timezone", "name", "email", "attendeePhoneNumber", "partySize"])],

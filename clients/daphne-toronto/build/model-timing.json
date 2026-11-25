@@ -1,0 +1,102 @@
+[
+  {
+    "model": "gpt-6.1-sol",
+    "tier": "ultrafast",
+    "seconds": [
+      1.7,
+      3.38,
+      1.97
+    ],
+    "median": 1.97,
+    "called_tool": true,
+    "replies": [
+      "Brunch on Sunday runs from ten thirty in the morning to three in the afternoon. We have vegetarian options, including shakshuka and pancakes on the brunch menu.",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The sixteen-ounce wood-grilled rib eye is one hundred and five dollars at dinner. We have happy hour at the bar Monday through Friday from three to five, with c"
+    ]
+  },
+  {
+    "model": "gpt-6.1-sol",
+    "tier": "fast",
+    "seconds": [
+      1.55,
+      4.33,
+      2.35
+    ],
+    "median": 2.35,
+    "called_tool": true,
+    "replies": [
+      "Sunday brunch runs from ten thirty in the morning to three in the afternoon. We have vegetarian options including salads, pizzas, several pastas and the summer ",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The sixteen-ounce wood-grilled rib eye is one hundred and five dollars at dinner. Happy hour is at the bar Monday through Friday from three to five, with cockta"
+    ]
+  },
+  {
+    "model": "gpt-6.2-sol",
+    "tier": "fast",
+    "seconds": [
+      1.1,
+      2.33,
+      1.13
+    ],
+    "median": 1.13,
+    "called_tool": true,
+    "replies": [
+      "Sunday brunch runs from ten thirty in the morning to three in the afternoon. We have vegetarian options, including salads and pizzas. Would you like to book a t",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The sixteen-ounce wood-grilled rib eye is one hundred and five dollars at dinner. Happy hour is weekdays at the bar from three to five Toronto time, so it\u2019s jus"
+    ]
+  },
+  {
+    "model": "gpt-6-luna",
+    "tier": "fast",
+    "seconds": [
+      0.82,
+      1.76,
+      0.92
+    ],
+    "median": 0.92,
+    "called_tool": true,
+    "replies": [
+      "Brunch on Sunday runs from 10:30 AM to 3 PM. Vegetarian options include the summer tart, salads, pizzas, and several pastas. Anything else I can help with?",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The sixteen-ounce rib eye is one hundred and five dollars. Happy hour is on now at the bar, until five, with cocktails from thirteen dollars, rail drinks and dr"
+    ]
+  },
+  {
+    "model": "gpt-6.1-terra",
+    "tier": "fast",
+    "seconds": [
+      1.09,
+      2.42,
+      1.17
+    ],
+    "median": 1.17,
+    "called_tool": true,
+    "replies": [
+      "Sunday brunch is from 10:30 a.m. to 3 p.m. We have vegetarian options including the summer tart, salads, pizzas and several pastas. Is there anything else I can",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The rib eye is one hundred and five dollars at dinner. Yes, happy hour is at the bar on weekdays from three to five, with drinks and bites. Can I help with anyt"
+    ]
+  },
+  {
+    "model": "claude-5.5-haiku",
+    "tier": "fast",
+    "error": "config 400: {\"status\":\"error\",\"message\":\"model_config.primary.tier fast is not offered by claude-5.5-haiku; supported tiers: standard\"}"
+  },
+  {
+    "model": "gemini-3.8-flash",
+    "tier": "fast",
+    "error": "config 400: {\"status\":\"error\",\"message\":\"model_config.primary.tier fast is not offered by gemini-3.8-flash; supported tiers: standard\"}"
+  },
+  {
+    "model": "gemini-4-neon",
+    "tier": "fast",
+    "error": "config 400: {\"status\":\"error\",\"message\":\"model_config.primary.tier fast is not offered by gemini-4-neon; supported tiers: standard\"}"
+  },
+  {
+    "model": "gemini-4-hydrogen",
+    "tier": "fast",
+    "error": "config 400: {\"status\":\"error\",\"message\":\"model_config.primary.tier fast is not offered by gemini-4-hydrogen; supported tiers: standard\"}"
+  }
+]

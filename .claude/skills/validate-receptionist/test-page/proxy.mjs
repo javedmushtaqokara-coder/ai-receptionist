@@ -12,7 +12,27 @@ const ROUTES = [
   ["GET", /^\/v2\/get-call\/[\w-]+$/],
 ];
 
-export async function proxy({ method, path, auth, body }, { apiKey, accessCode, agentId }) {
+// WebRTC signaling for a call that already exists. The SDK sends these to
+// `<baseURL>/webrtc-proxy/<call_id>/...`, authorised by that call's own
+// short-lived access token, so they pass through untouched (no API key added).
+const WEBRTC = /^\/webrtc-proxy\/[\w-]+\/v1\/webrtc\/sessions(\/[\w-]+)?$/;
+
+async function passThrough({ method, path, auth, body, sdkVersion }) {
+  if (!["POST", "PATCH", "DELETE"].includes(method) || !WEBRTC.test(path)) {
+    return { status: 404, body: { error: "Not allowed" } };
+  }
+  const headers = { "Content-Type": "application/json" };
+  if (auth) headers.Authorization = auth;
+  if (sdkVersion) headers["X-Retell-Client-JS-SDK-Version"] = sdkVersion;
+  const res = await fetch(RETELL + path, { method, headers, body: method === "DELETE" ? undefined : body || undefined });
+  const text = await res.text();
+  let json;
+  try { json = text ? JSON.parse(text) : {}; } catch { json = { raw: text }; }
+  return { status: res.status, body: json };
+}
+
+export async function proxy({ method, path, auth, body, sdkVersion }, { apiKey, accessCode, agentId }) {
+  if (path.startsWith("/webrtc-proxy/")) return passThrough({ method, path, auth, body, sdkVersion });
   if (!accessCode || auth !== `Bearer ${accessCode}`) {
     return { status: 401, body: { error: "Wrong or missing access code" } };
   }

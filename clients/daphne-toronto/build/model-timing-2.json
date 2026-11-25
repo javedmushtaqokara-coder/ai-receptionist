@@ -1,0 +1,114 @@
+[
+  {
+    "model": "claude-5.5-haiku",
+    "tier": "standard",
+    "seconds": [
+      1.31,
+      2.54,
+      1.38
+    ],
+    "median": 1.38,
+    "called_tool": true,
+    "replies": [
+      "Brunch runs Saturday and Sunday from 10:30 AM to 3 PM, so Sunday is covered. For vegetarian options, the menu includes shakshuka, pancakes, and eggs Benedict, p",
+      "Friday is November 27. Let me check availability around seven for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12",
+      "The 16 oz rib eye is $105, served wood-grilled with your choice of bordelaise or peppercorn sauce. Yes, we have happy hour at the bar on weekdays from 3 to 5 PM"
+    ]
+  },
+  {
+    "model": "gemini-3.8-flash",
+    "tier": "standard",
+    "seconds": [
+      2.17,
+      5.21,
+      5.61
+    ],
+    "median": 5.21,
+    "called_tool": true,
+    "replies": [
+      "Brunch is served on Sundays from 10:30 AM to 3:00 PM. We have wonderful vegetarian options like our pancakes, shakshuka, and avocado toast, as well as several s",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "Our 16-ounce wood-grilled rib eye is one hundred and five dollars. We do have happy hour at the bar Monday through Friday from 3:00 to 5:00 PM, featuring drinks"
+    ]
+  },
+  {
+    "model": "gemini-4-neon",
+    "tier": "standard",
+    "seconds": [
+      4.67,
+      26.83,
+      8.28
+    ],
+    "median": 8.28,
+    "called_tool": true,
+    "replies": [
+      "Sunday brunch is from 10:30 AM to 3 PM. We do have vegetarian options, including our summer tart, salads, pizzas, several pastas, and sides. Would you like to b",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "Our 16-ounce rib eye at dinner is one hundred and five dollars. We do have happy hour at the bar Monday to Friday from three to five PM, with cocktails for thir"
+    ]
+  },
+  {
+    "model": "gemini-4-hydrogen",
+    "tier": "standard",
+    "seconds": [
+      1.96,
+      4.15,
+      2.74
+    ],
+    "median": 2.74,
+    "called_tool": true,
+    "replies": [
+      "Brunch on Sunday is from 10:30 AM to 3 PM, and we do have vegetarian options including our summer tart, salads, pizzas, several pastas, and sides. Would you lik",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The 16-ounce rib eye is one hundred and five dollars on our dinner menu. Yes, we do have happy hour at the bar Monday through Friday from three to five PM, feat"
+    ]
+  },
+  {
+    "model": "gemini-4-carbon",
+    "tier": "standard",
+    "seconds": [
+      4.15,
+      6.19,
+      7.0
+    ],
+    "median": 6.19,
+    "called_tool": true,
+    "replies": [
+      "Sunday brunch is from ten thirty in the morning until three in the afternoon. For vegetarian dishes, we offer things like pancakes, shakshuka, salads, and pizza",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "Our sixteen-ounce wood-grilled rib eye is one hundred and five dollars on the dinner menu. We also do happy hour at the bar Monday through Friday from three to "
+    ]
+  },
+  {
+    "model": "gpt-6-luna",
+    "tier": "standard",
+    "seconds": [
+      1.06,
+      1.99,
+      0.86
+    ],
+    "median": 1.06,
+    "called_tool": true,
+    "replies": [
+      "Brunch is served Sundays from ten thirty to three. Vegetarian options include the summer tart, salads, pizzas, and several pastas. Is there anything else I can ",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The 16-ounce rib eye is $105. Yes, happy hour is at the bar weekdays from 3 to 5, with cocktails from $13 to $14, rail drinks and draft-style beer at $9, and pr"
+    ]
+  },
+  {
+    "model": "gpt-6-luna",
+    "tier": "fast",
+    "seconds": [
+      0.97,
+      2.51,
+      1.13
+    ],
+    "median": 1.13,
+    "called_tool": true,
+    "replies": [
+      "Brunch is served Sundays from 10:30 AM to 3 PM. We have several vegetarian options, including the summer tart, salads, pizzas, and some pastas. Is there anythin",
+      "Let me check our book for you. | check_availability | {\"available_slots\":[\"2026-11-27T11:30:00.000-05:00\",\"2026-11-27T12:00:00.000-05:00\",\"2026-11-27T12:30:00.0",
+      "The 16-ounce rib eye is a hundred and five dollars. Yes, happy hour is on now at the bar until five, with cocktails from thirteen dollars, rail drinks and draft"
+    ]
+  }
+]

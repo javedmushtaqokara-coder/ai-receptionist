@@ -1,0 +1,2 @@
+{"messages":[{"message_id":"message_7ca7762cf1b0b4f2a3e1474b","role":"agent","created_timestamp":1795650033416,"content":"Sunday brunch runs from ten thirty in the morning to three in the afternoon. We have vegetarian options, including the summer tart, salads, pizzas and several pastas. Would you like to reserve a table?","metadata":{"response_id":1}}],"dynamic_variables":{"call_id":"playground","session_type":"voice","call_type":"web_call","system_timezone":"America/Toronto"},"call_ended":false,"knowledge_base_retrieved_contents":[]}
+HTTP 200

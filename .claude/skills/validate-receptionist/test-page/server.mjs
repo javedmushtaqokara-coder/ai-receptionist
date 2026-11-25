@@ -57,7 +57,8 @@ createServer(async (req, res) => {
     let body = "";
     for await (const chunk of req) body += chunk;
     const out = await proxy(
-      { method: req.method, path: url.pathname, auth: req.headers.authorization, body },
+      { method: req.method, path: url.pathname, auth: req.headers.authorization, body,
+        sdkVersion: req.headers["x-retell-client-js-sdk-version"] },
       { apiKey, accessCode, agentId: config.agent_id },
     );
     return send(res, out.status, out.body);

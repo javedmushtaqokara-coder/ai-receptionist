@@ -1,0 +1,2 @@
+{"app_id":"app_8ea5ad1afc4c3b02fe5cba57","org_id":"org_fn1ZqnGmkpiYIRyX","type":"calendar","provider":"calcom","name":"Daphne - Cal.com","tenant_url":"cal.com","connection_status":"not_connected","auth_config":{"type":"api_key"},"created_timestamp":1795650009717,"user_modified_timestamp":1795650009717}
+HTTP 201
