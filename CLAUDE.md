@@ -134,6 +134,19 @@ Whenever the owner gives a platform and an API key:
 - Before every client build, read `/docs/<platform>/CAPABILITIES.md` instead
   of the live docs.
 
+## Retell workspaces
+
+- A Retell API key only works in the workspace it was created in.
+  `RETELL_API_KEY` is the "Alpha Hvac Ai agents" workspace.
+- When the owner says a client belongs in another workspace, ask once for
+  that workspace's key (plain-English steps), save it as
+  `RETELL_API_KEY_<WORKSPACE>` (for example `RETELL_API_KEY_SALON`), and
+  record the variable name in the client's `build/ids.json` as
+  `retell_key_env`. Every API call for that client uses that key. Confirm the
+  workspace with `GET /get-api-key-info` before building.
+- Integrations (Cal.com apps and so on) belong to a workspace too: create
+  them again inside the client's workspace.
+
 ## Platforms in use
 
 - **Voice: Retell** (`RETELL_API_KEY` in `.env`). Capability map:

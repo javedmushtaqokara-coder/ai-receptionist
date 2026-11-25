@@ -1,0 +1,11 @@
+{
+  "platform": "retell",
+  "retell_workspace": "salon",
+  "retell_key_env": "RETELL_API_KEY_SALON",
+  "agent_id": null,
+  "llm_id": null,
+  "calcom_app_id_in_workspace": null,
+  "calcom_schedule_id": 2692015,
+  "calcom_event_types": {"cut_style_1h": 8062514, "colour_perm_3h": 8062515, "bleach_balayage_5h": 8062517},
+  "phone_number": null
+}
