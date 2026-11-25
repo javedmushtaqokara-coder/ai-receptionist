@@ -2,10 +2,18 @@
   "platform": "retell",
   "retell_workspace": "salon",
   "retell_key_env": "RETELL_API_KEY_SALON",
-  "agent_id": null,
-  "llm_id": null,
-  "calcom_app_id_in_workspace": null,
+  "agent_id": "agent_4138b73cd738d82f0bcc5c4978",
+  "llm_id": "llm_083468f49992019b3089ec8f94c0",
+  "calcom_app_id_in_workspace": "app_06a9fa90da4521b68f3e038b",
   "calcom_schedule_id": 2692015,
-  "calcom_event_types": {"cut_style_1h": 8062514, "colour_perm_3h": 8062515, "bleach_balayage_5h": 8062517},
-  "phone_number": null
+  "calcom_event_types": {
+    "cut_style_1h": 8062514,
+    "colour_perm_3h": 8062515,
+    "bleach_balayage_5h": 8062517
+  },
+  "phone_number": null,
+  "agent_version_published": 0,
+  "voice_id": "retell-Chloe",
+  "retell_org": "Salon Caling agent (org_dANbZtcNFZ1SA6as)",
+  "test_case_definition_ids_file": "api/test-case-ids.txt"
 }

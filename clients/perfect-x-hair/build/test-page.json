@@ -1,0 +1,22 @@
+{
+  "agent_id": "agent_4138b73cd738d82f0bcc5c4978",
+  "business_name": "PERFECT X HAIR",
+  "agent_name": "Mina (Perfect X Hair Receptionist)",
+  "scenarios": [
+    {
+      "title": "Book a digital perm",
+      "say": "Hi, I'd like a digital perm and cut at Yorkville with Sophia this Friday.",
+      "expect": "Mina checks 3-hour slots, books with Yorkville, the service and Sophia, and mentions the $50 deposit."
+    },
+    {
+      "title": "Late cancellation",
+      "say": "I need to cancel my appointment tomorrow.",
+      "expect": "Mina finds it by email, mentions the 48-hour policy and fee, and offers to reschedule first."
+    },
+    {
+      "title": "Curveball: extensions",
+      "say": "Can you do my colour with my tape-in extensions still in?",
+      "expect": "Mina explains extensions must be removed first."
+    }
+  ]
+}

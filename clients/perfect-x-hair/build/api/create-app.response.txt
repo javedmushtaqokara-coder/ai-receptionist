@@ -1,0 +1,2 @@
+{"app_id":"app_06a9fa90da4521b68f3e038b","org_id":"org_dANbZtcNFZ1SA6as","type":"calendar","provider":"calcom","name":"Perfect X Hair - Cal.com","tenant_url":"cal.com","connection_status":"not_connected","auth_config":{"type":"api_key"},"created_timestamp":1795607063307,"user_modified_timestamp":1795607063307}
+HTTP 201
